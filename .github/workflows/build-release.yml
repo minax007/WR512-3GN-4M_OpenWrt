@@ -13,8 +13,8 @@ env:
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "wr512-3gn-4M"
-  PACKAGES_TYPE1: "luci luci-theme-openwrt -luci-theme-bootstrap  openvpn-openssl luci-app-openvpn  -ppp -ppp-mod-pppoe -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only"
-  #  PACKAGES_TYPE2: "luci luci-theme-material luci-app-nlbwmon luci-app-sqm wpad-mesh-wolfssl mtr -wpad-basic-wolfssl"
+  PACKAGES_TYPE1: "luci luci-theme-material kmod-wireguard luci-app-wireguard wireguard-tools luci-proto-wireguard -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only"
+  #  PACKAGES_TYPE2: "-ppp -ppp-mod-pppoe"
     
 jobs:
   build:

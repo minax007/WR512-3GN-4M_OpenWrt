@@ -13,7 +13,7 @@ env:
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "wr512-3gn-4M"
-  PACKAGES_TYPE1: "luci luci-theme-material -luci-theme-bootstrap luci-app-cpu-status-mini luci-app-temp-status internet-detector openvpn-openssl luci-app-openvpn"
+  PACKAGES_TYPE1: "luci luci-theme-material -luci-theme-bootstrap luci-app-cpu-status-mini luci-app-temp-status openvpn-openssl luci-app-openvpn"
   #  PACKAGES_TYPE2: "luci luci-theme-material luci-app-nlbwmon luci-app-sqm wpad-mesh-wolfssl mtr -wpad-basic-wolfssl"
     
 jobs:

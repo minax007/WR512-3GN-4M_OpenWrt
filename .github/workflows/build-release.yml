@@ -41,9 +41,8 @@ jobs:
  
     # Pull the first six letters from the version.buildinfo-file for naming the release e. g. "R16767"
     - name: Download version info
-      run: |
-        curl -O "https://archive.openwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/version.buildinfo"
-        echo "LEDE_VERSION=$(cut -c-6 <<< cat version.buildinfo)" >> $GITHUB_ENV 
+      run: 
+        echo "LEDE_VERSION=${{ env.VERSION }}" >> $GITHUB_ENV 
      
     - name: Include External ipk-Packages
       run: |

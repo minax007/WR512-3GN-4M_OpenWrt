@@ -69,8 +69,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ env.VERSION }}_$(date +"%Y.%m.%d-%H%M")_release
-        release_name: OpenWrt WR512-3GN-4M (${{ env.VERSION }}) $(date +"%Y.%m.%d-%H%M") release
+        tag_name: ${{ env.VERSION }}_release
+        release_name: OpenWrt WR512-3GN-4M (${{ env.VERSION }}) release
         body: |
           This release is based on OpenWrt ${{ env.VERSION }}.
                     

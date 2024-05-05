@@ -19,8 +19,6 @@ jobs:
   build:
     permissions: write-all
     runs-on: ubuntu-20.04
-    container:
-      image: 2.7.18-buster
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:

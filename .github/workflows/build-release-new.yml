@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  VERSION: "19.07.9"
+  VERSION: "20.02.1"
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "wr512-3gn-8M"

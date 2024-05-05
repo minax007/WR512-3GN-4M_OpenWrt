@@ -1,4 +1,4 @@
-name: Build OpenWrt Release NEW
+name: Build ImmortalWrt Release
 
 on:
  # schedule:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  VERSION: "21.02.0-rc2"
+  VERSION: "21.02.0"
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "unbranded_wr512-3gn-8m"
@@ -34,32 +34,32 @@ jobs:
     - name: Download imagebuilder
       working-directory: /mnt/workdir
       run: |
-        curl -O "https://archive.openwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/openwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz"
-        tar xvaf openwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz
-        ln -sf /mnt/workdir/openwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64 $GITHUB_WORKSPACE/openwrt
+        curl -O "https://downloads.immortalwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz"
+        tar xvaf immortalwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz
+        ln -sf /mnt/workdir/immortalwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64 $GITHUB_WORKSPACE/immortalwrt
  
     # Pull the first six letters from the version.buildinfo-file for naming the release e. g. "R16767"
     - name: Download version info
       run: 
-        echo "OPENWRT_VERSION=${{ env.VERSION }}" >> $GITHUB_ENV 
+        echo "IMMORTALWRT_VERSION=${{ env.VERSION }}" >> $GITHUB_ENV 
      
     - name: Include External ipk-Packages
       run: |
         wget -O packages.txt https://github.com/minax007/packages/raw/main/external-package-urls.txt
-        cat packages.txt | xargs wget -P /mnt/workdir/openwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64/packages
+        cat packages.txt | xargs wget -P /mnt/workdir/immortalwrt-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64/packages
         
     - name: Build the image of type 1
       id: type1
       run: |
-        cd openwrt
+        cd immortalwrt
         make image PROFILE="${{ env.PROFILE }}" PACKAGES="${{ env.PACKAGES_TYPE1 }}"
-        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/openwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin OpenWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
+        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
     - name: Build the image of type 2
       id: type2
       run: |
-        cd openwrt
+        cd immortalwrt
         make image PROFILE="${{ env.PROFILE }}" PACKAGES="${{ env.PACKAGES_TYPE2 }}"
-        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/openwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin OpenWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
+        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
 
 
     - name: Create Release
@@ -69,9 +69,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ env.VERSION }}_release
-        release_name: OpenWrt WR512-3GN-4M (${{ env.VERSION }}) release
+        release_name: ImmortalWrt WR512-3GN-4M (${{ env.VERSION }}) release
         body: |
-          This release is based on OpenWrt ${{ env.VERSION }}.
+          This release is based on ImmortalWrt ${{ env.VERSION }}.
                     
         draft: false
         prerelease: false
@@ -83,8 +83,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: openwrt/OpenWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
-        asset_name: OpenWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
+        asset_path: immortalwrt/ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
+        asset_name: ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
         asset_content_type: application/bin
 
     - name: Upload type2 Asset
@@ -94,6 +94,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: openwrt/OpenWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
-        asset_name: OpenWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
+        asset_path: immortalwrt/ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
+        asset_name: ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
         asset_content_type: application/bin

@@ -35,8 +35,8 @@ jobs:
     - name: Download imagebuilder
       working-directory: /mnt/workdir
       run: |
-        curl -O "https://archive.openwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz"
-        tar xvaf lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz
+        curl -O "https://archive.openwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.zst"
+        tar xvaf lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.zst
         ln -sf /mnt/workdir/lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64 $GITHUB_WORKSPACE/lede
  
     # Pull the first six letters from the version.buildinfo-file for naming the release e. g. "R16767"

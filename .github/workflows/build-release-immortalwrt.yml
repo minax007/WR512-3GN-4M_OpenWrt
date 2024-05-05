@@ -53,13 +53,16 @@ jobs:
       run: |
         cd immortalwrt
         make image PROFILE="${{ env.PROFILE }}" PACKAGES="${{ env.PACKAGES_TYPE1 }}"
-        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
+        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-18.06-snapshot-r8179-cab1e2e283-ramips-rt305x-unbranded_wr512-3gn-8m-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
+#        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_sysupgrade.bin
+        
     - name: Build the image of type 2
       id: type2
       run: |
         cd immortalwrt
         make image PROFILE="${{ env.PROFILE }}" PACKAGES="${{ env.PACKAGES_TYPE2 }}"
-        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
+        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-18.06-snapshot-r8179-cab1e2e283-ramips-rt305x-unbranded_wr512-3gn-8m-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
+#        mv bin/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/immortalwrt-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}-${{ env.PROFILE }}-squashfs-sysupgrade.bin ImmortalWrt_WR512-3GN-4M_${{ env.VERSION }}_MINI_sysupgrade.bin
 
 
     - name: Create Release

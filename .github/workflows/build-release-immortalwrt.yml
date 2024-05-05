@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  VERSION: "18.06-k5.4-SNAPSHOT"
+  VERSION: "18.06-SNAPSHOT"
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "unbranded_wr512-3gn-8m"

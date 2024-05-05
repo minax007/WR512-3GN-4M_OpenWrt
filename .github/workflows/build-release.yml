@@ -9,8 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  VERSION: "23.05.3"
-#  VERSION: "17.01.6"
+  VERSION: "17.01.6"
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "wr512-3gn-4M"
@@ -35,8 +34,8 @@ jobs:
     - name: Download imagebuilder
       working-directory: /mnt/workdir
       run: |
-        curl -O "https://archive.openwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.zst"
-        tar xvaf lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.zst
+        curl -O "https://archive.openwrt.org/releases/${{ env.VERSION }}/targets/${{ env.BOARD }}/${{ env.SUBTARGET }}/lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz"
+        tar xvaf lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64.tar.xz
         ln -sf /mnt/workdir/lede-imagebuilder-${{ env.VERSION }}-${{ env.BOARD }}-${{ env.SUBTARGET }}.Linux-x86_64 $GITHUB_WORKSPACE/lede
  
     # Pull the first six letters from the version.buildinfo-file for naming the release e. g. "R16767"

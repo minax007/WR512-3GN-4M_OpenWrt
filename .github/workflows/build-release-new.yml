@@ -12,7 +12,7 @@ env:
   VERSION: "23.05.3"
   BOARD: "ramips"
   SUBTARGET: "rt305x"
-  PROFILE: "wr512-3gn-4M"
+  PROFILE: "unbranded_wr512-3gn-8m"
   PACKAGES_TYPE1: "luci luci-theme-material kmod-wireguard luci-app-wireguard wireguard-tools luci-proto-wireguard  -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe -opkg"
   PACKAGES_TYPE2: "uhttpd uhttpd-mod-ubus libiwinfo-lua luci-base luci-app-firewall luci-mod-admin-full luci-theme-material kmod-wireguard luci-app-wireguard wireguard-tools luci-proto-wireguard -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe -opkg"    
 jobs:

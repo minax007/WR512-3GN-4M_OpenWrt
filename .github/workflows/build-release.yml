@@ -13,7 +13,7 @@ env:
   BOARD: "ramips"
   SUBTARGET: "rt305x"
   PROFILE: "wr512-3gn-4M"
-  PACKAGES_TYPE1: "luci luci-theme-material kmod-wireguard luci-app-wireguard wireguard-tools luci-proto-wireguard  -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe"
+  PACKAGES_TYPE1: "luci luci-theme-material kmod-wireguard luci-app-wireguard wireguard-tools luci-proto-wireguard  -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe openssh-sftp-server"
 #  PACKAGES_TYPE2: "uhttpd uhttpd-mod-ubus libiwinfo-lua luci-base luci-app-firewall luci-mod-admin-full luci-theme-material kmod-wireguard luci-app-wireguard wireguard-tools luci-proto-wireguard -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe"    
 jobs:
   build:
